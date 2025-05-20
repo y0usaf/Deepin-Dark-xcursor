@@ -32,10 +32,10 @@
               cp $src/index.theme $out/share/icons/${themeName}/
             else
               cat > $out/share/icons/${themeName}/index.theme << EOF
-              [Icon Theme]
-              Name=${themeName}
-              Comment=Deepin Dark X11 Cursor Theme
-              EOF
+[Icon Theme]
+Name=${themeName}
+Comment=Deepin Dark X11 Cursor Theme
+EOF
             fi
           '';
 
