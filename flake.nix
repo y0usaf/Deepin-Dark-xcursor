@@ -19,9 +19,24 @@
           sourceRoot = ".";
 
           installPhase = ''
+            # Create the cursor theme directory
             mkdir -p $out/share/icons/${themeName}
-            cp -r ./cursors $out/share/icons/${themeName}/
-            cp ./index.theme $out/share/icons/${themeName}/
+            
+            # Copy the cursors directory and index.theme
+            if [ -d "$src/cursors" ]; then
+              cp -r $src/cursors $out/share/icons/${themeName}/
+            fi
+            
+            # Copy or create the index.theme
+            if [ -f "$src/index.theme" ]; then
+              cp $src/index.theme $out/share/icons/${themeName}/
+            else
+              cat > $out/share/icons/${themeName}/index.theme << EOF
+              [Icon Theme]
+              Name=${themeName}
+              Comment=Deepin Dark X11 Cursor Theme
+              EOF
+            fi
           '';
 
           meta = {
